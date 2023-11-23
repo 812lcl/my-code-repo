@@ -6,26 +6,22 @@ type ListNode struct {
 }
 
 func sortList(head *ListNode) *ListNode {
-	if head == nil || head.Next == nil {
+	if head == nil {
 		return head
 	}
-	dummy := &ListNode{Next: head}
-	cur := head.Next
-	dummy.Next.Next = nil
+	newHead := &ListNode{Val: 0, Next: nil} // 这里初始化不要直接指向 head，为了下面循环可以统一处理
+	cur, pre := head, newHead
 	for cur != nil {
-		for pre, behind := dummy, dummy.Next; behind != nil; {
-			if cur.Val < behind.Val {
-				next := cur.Next
-				cur.Next = behind
-				pre.Next = cur
-				cur = next
-				break
-			}
+		next := cur.Next
+		for pre.Next != nil && pre.Next.Val < cur.Val {
 			pre = pre.Next
-			behind = behind.Next
 		}
+		cur.Next = pre.Next
+		pre.Next = cur
+		pre = newHead // 归位，重头开始
+		cur = next
 	}
-	return dummy.Next
+	return newHead.Next
 }
 
 func sortList1(head *ListNode) *ListNode {
