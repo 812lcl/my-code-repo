@@ -9,7 +9,7 @@ func quickSort(arr []int, left, right int) {
 
 	pivot := arr[left]
 	i, j := left+1, right
-	for i <= j {
+	for i < j {
 		for i <= right && arr[i] <= pivot {
 			i++
 		}
