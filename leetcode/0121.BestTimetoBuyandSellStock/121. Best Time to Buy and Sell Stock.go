@@ -50,3 +50,57 @@ func maxProfit2(prices []int) int {
 	}
 	return res
 }
+
+type stack []int
+
+func (s *stack) Push(v int) {
+	*s = append(*s, v)
+}
+
+func (s *stack) Pop() int {
+	if s.Empty() {
+		return 0
+	}
+	res := (*s)[s.Length()-1]
+	*s = (*s)[:s.Length()-1]
+	return res
+}
+
+func (s *stack) Top() int {
+	if s.Empty() {
+		return 0
+	}
+	return (*s)[s.Length()-1]
+}
+
+func (s *stack) Empty() bool {
+	return s.Length() == 0
+}
+
+func (s *stack) Length() int {
+	return len(*s)
+}
+
+func maxProfit3(prices []int) int {
+	if len(prices) == 0 {
+		return 0
+	}
+	res := 0
+	var st stack
+	st.Push(prices[0])
+	for i := 1; i < len(prices); i++ {
+		if prices[i] > st.Top() {
+			st.Push(prices[i])
+		} else {
+			for !st.Empty() {
+				if st.Top() < prices[i] {
+					break
+				}
+				st.Pop()
+			}
+			st.Push(prices[i])
+		}
+		res = max(res, st.Top()-st[0])
+	}
+	return res
+}

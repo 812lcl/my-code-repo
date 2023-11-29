@@ -6,10 +6,6 @@ type ListNode struct {
 }
 
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
-	if list1 == nil && list2 == nil {
-		return nil
-	}
-
 	if list1 == nil {
 		return list2
 	}

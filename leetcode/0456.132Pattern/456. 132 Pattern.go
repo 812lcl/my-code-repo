@@ -42,6 +42,7 @@ func find132pattern(nums []int) bool {
 			return true
 		}
 		for !st.Empty() && nums[i] > st.Top() {
+			// st.Top() is num3, nums[i] is num2, so just need to find if there is a num1 < num3
 			num3 = st.Pop()
 		}
 		st.Push(nums[i])
