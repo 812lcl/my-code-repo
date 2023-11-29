@@ -13,13 +13,6 @@ func maxArea(height []int) int {
 	return max
 }
 
-func min(a, b int) int {
-	if a > b {
-		return b
-	}
-	return a
-}
-
 func maxArea1(height []int) int {
 	max := 0
 	for i, j := 0, len(height)-1; i < j; {
