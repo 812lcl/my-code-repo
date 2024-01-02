@@ -98,3 +98,35 @@ func threeSum3(nums []int) [][]int {
 	}
 	return res
 }
+
+func threeSum4(nums []int) [][]int {
+	sort.Ints(nums)
+	result, length := make([][]int, 0), len(nums)
+	for start := 0; start < length-2; start++ {
+		if start > 0 && nums[start] == nums[start-1] {
+			continue
+		}
+		for mid, end := start+1, length-1; mid < end; {
+			if mid > start+1 && nums[mid] == nums[mid-1] {
+				mid++
+				continue
+			}
+			if end < length-1 && nums[end] == nums[end+1] {
+				end--
+				continue
+			}
+			sum := nums[start] + nums[mid] + nums[end]
+			if sum == 0 {
+				result = append(result, []int{nums[start], nums[mid], nums[end]})
+				mid++
+				end--
+			} else if sum > 0 {
+				end--
+			} else {
+				mid++
+			}
+
+		}
+	}
+	return result
+}

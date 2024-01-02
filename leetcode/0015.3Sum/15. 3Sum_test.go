@@ -35,6 +35,13 @@ func Test_threeSum(t *testing.T) {
 			},
 			want: [][]int{},
 		},
+		{
+			name: "case 4",
+			args: args{
+				nums: []int{-2, 0, 0, 2, 2},
+			},
+			want: [][]int{{-2, 0, 2}},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -42,6 +49,9 @@ func Test_threeSum(t *testing.T) {
 				t.Errorf("threeSum() = %v, want %v", got, tt.want)
 			}
 			if got := threeSum2(tt.args.nums); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("threeSum() = %v, want %v", got, tt.want)
+			}
+			if got := threeSum4(tt.args.nums); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("threeSum() = %v, want %v", got, tt.want)
 			}
 		})
