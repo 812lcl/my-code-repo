@@ -31,8 +31,8 @@ func partition(arr []int, left, right int) int {
 		}
 		arr[i], arr[j] = arr[j], arr[i]
 	}
-	arr[left], arr[j] = arr[j], arr[left]
-	return j
+	arr[left], arr[i] = arr[i], arr[left]
+	return i
 }
 
 func QuickSort(arr []int) {

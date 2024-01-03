@@ -79,12 +79,12 @@ func quickSortTopK(arr []int, left, right, k int) int {
 		}
 		arr[i], arr[j] = arr[j], arr[i]
 	}
-	arr[left], arr[j] = arr[j], arr[left]
-	if j-left+1 == k {
-		return arr[j]
-	} else if j-left+1 > k {
-		return quickSortTopK(arr, left, j-1, k)
+	arr[left], arr[i] = arr[i], arr[left]
+	if i-left+1 == k {
+		return arr[i]
+	} else if i-left+1 > k {
+		return quickSortTopK(arr, left, i-1, k)
 	} else {
-		return quickSortTopK(arr, j+1, right, k-(j-left+1))
+		return quickSortTopK(arr, i+1, right, k-(i-left+1))
 	}
 }
