@@ -8,22 +8,20 @@ func quickSort(arr []int, left, right int) {
 	}
 
 	pivot := arr[left]
-	i, j := left+1, right
+	i, j := left, right
 	for i < j {
-		for i <= right && arr[i] <= pivot {
-			i++
-		}
-		for j >= left+1 && arr[j] >= pivot {
+		for j > i && arr[j] >= pivot {
 			j--
 		}
-		if i < j {
-			arr[i], arr[j] = arr[j], arr[i]
+		for i < j && arr[i] <= pivot {
+			i++
 		}
+		arr[i], arr[j] = arr[j], arr[i]
 	}
-	arr[left], arr[j] = arr[j], arr[left]
+	arr[left], arr[i] = arr[i], arr[left]
 
-	quickSort(arr, left, j-1)
-	quickSort(arr, j+1, right)
+	quickSort(arr, left, i-1)
+	quickSort(arr, i+1, right)
 }
 
 func QuickSort(arr []int) {
