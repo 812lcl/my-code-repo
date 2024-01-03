@@ -18,10 +18,10 @@ func quickSort(arr []int, left, right int) {
 		}
 		arr[i], arr[j] = arr[j], arr[i]
 	}
-	arr[left], arr[i] = arr[i], arr[left]
+	arr[left], arr[j] = arr[j], arr[left]
 
-	quickSort(arr, left, i-1)
-	quickSort(arr, i+1, right)
+	quickSort(arr, left, j-1)
+	quickSort(arr, j+1, right)
 }
 
 func QuickSort(arr []int) {

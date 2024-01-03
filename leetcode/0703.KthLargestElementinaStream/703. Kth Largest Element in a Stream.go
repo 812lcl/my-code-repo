@@ -65,18 +65,19 @@ func quickSortTopK(arr []int, left, right, k int) int {
 	if left > right {
 		return 0
 	}
+	if left == right && k == 1 {
+		return arr[left]
+	}
 	pivot := arr[left]
-	i, j := left+1, right
+	i, j := left, right
 	for i < j {
-		for i <= right && arr[i] > pivot {
-			i++
-		}
-		for j >= left+1 && arr[j] < pivot {
+		for j > i && arr[j] <= pivot {
 			j--
 		}
-		if i < j {
-			arr[i], arr[j] = arr[j], arr[i]
+		for i < j && arr[i] >= pivot {
+			i++
 		}
+		arr[i], arr[j] = arr[j], arr[i]
 	}
 	arr[left], arr[j] = arr[j], arr[left]
 	if j-left+1 == k {
@@ -84,6 +85,6 @@ func quickSortTopK(arr []int, left, right, k int) int {
 	} else if j-left+1 > k {
 		return quickSortTopK(arr, left, j-1, k)
 	} else {
-		return quickSortTopK(arr, j+1, right, k-j-1)
+		return quickSortTopK(arr, j+1, right, k-(j-left+1))
 	}
 }
