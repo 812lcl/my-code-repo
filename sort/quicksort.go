@@ -7,6 +7,19 @@ func quickSort(arr []int, left, right int) {
 		return
 	}
 
+	for left < right {
+		pivot := partition(arr, left, right)
+		if pivot-left < right-pivot {
+			quickSort(arr, left, pivot-1)
+			left = pivot + 1
+		} else {
+			quickSort(arr, pivot+1, right)
+			right = pivot - 1
+		}
+	}
+}
+
+func partition(arr []int, left, right int) int {
 	pivot := arr[left]
 	i, j := left, right
 	for i < j {
@@ -19,9 +32,7 @@ func quickSort(arr []int, left, right int) {
 		arr[i], arr[j] = arr[j], arr[i]
 	}
 	arr[left], arr[j] = arr[j], arr[left]
-
-	quickSort(arr, left, j-1)
-	quickSort(arr, j+1, right)
+	return j
 }
 
 func QuickSort(arr []int) {
